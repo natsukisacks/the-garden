@@ -1,27 +1,33 @@
-import pygame
-from sys import exit
+import pygame, sys
+from settings import *
+from level import Level
+# from model import title_screen
 
-# Initialize pygame
-pygame.init()
+class Game:
+    def __init__(self):
+        # General set up
+        pygame.init()
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        pygame.display.set_caption("The Garden")
+        self.clock = pygame.time.Clock()
 
-# Create just a black screen
-screen = pygame.display.set_mode((800, 400))
+        self.level = Level()
 
-# Help control the frame rate/time
-clock = pygame.time.Clock()
+    def run(self):
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                # Create the title screen
+                # title_screen(screen)
 
-# Create a display surface that is always shown. Can't be hidden.
-test_surface = pygame.Surface((100, 200))
-test_surface.fill("Green")
+                # Display the screen
+                self.screen.fill("black")
+                self.level.run()
+                pygame.display.update()
+                self.clock.tick(FPS)  # updating the image 60x/sec
 
-while True:
-    # Create an event loop that checks if the user wants to close the window
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            exit()  # Prevent a coding error
-
-    screen.blit(test_surface, (200, 100)) # Change where the display surface is
-    # Display the screen
-    pygame.display.update()
-    clock.tick(60)
+if __name__ == "__main__":
+    game = Game()
+    game.run()
