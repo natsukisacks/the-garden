@@ -1,55 +1,97 @@
+""" Creates the map that everything is based upon. """
+
 import pygame
+from settings import *
+# from player import Player, get_player
 
-class Button():
+class Tile(pygame.sprite.Sprite):
     """
-    Insert docstring here
+    groups: sprite groups it should be a part of
     """
-    def __init__(self, x, y, image):
-        self.image = image
-        self.rect = self.image.get_rect()
-        self.rect.topleft = (x,y)
 
-    def draw(self, surface):
-        action = False
+    def __init__(self, pos):
+        # Initiating the parent Sprite class
+        super().__init__()
+        image = pygame.image.load("tomato.png").convert_alpha()
+        self.image = pygame.transform.scale(image, (64, 64))
+        self.rect = self.image.get_rect(topleft = pos)
 
-        # Get mouse position
-        pos = pygame.mouse.get_pos()
+    def update(self, x_shift):
+      self.rect.x += x_shift
 
-        # Check mouse behavior
-        if self.rect.collidepoint(pos):
-            if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
-                self.clicked = True
-                print("CLICKED")
+class Level:
+  def __init__(self, level_map, surface):
+    self.display_surface = surface
+    self.setup_level(level_map)
+    # self.player = Player((400, 200))  # how to make an instance of the player sprite without drawing it?
+      # does this actually create an instance of the player??
+    # self.player = get_player()
+    # self.player_group = pygame.sprite.Group()
+    # self.player_group.add(self.player)
 
-        # Allow the button to be pressed multiple times
-            if pygame.mouse.get_pressed()[0] == 0:
-                self.clicked = False
-                action = True
-        # Draw the button on the screen
-        surface.blit(self.image, self.rect)
+  def setup_level(self, layout):
+    self.tiles = pygame.sprite.Group()
+    # self.player_group = pygame.sprite.Group()
+    # self.player_group.add(self.player)
+    
+    for row_index, row in enumerate(layout):
+      for col_index, col in enumerate(row):
+        x = col_index * TILESIZE
+        y = row_index * TILESIZE
 
-        return action
+        if col == "x":
+          tile = Tile((x, y))
+          self.tiles.add(tile)
+        # taking this out for now since it doesn't work with handle_keys. will put back once
+        # collisions work.
+        # if col == "p":
+        #   player_sprite = Player((x, y))
+        #   self.player_group.add(player_sprite)
+  
+  # def get_hits(self, tiles):
+  #   """ figure out which tiles are the boundary"""
+  #   hits = []
+  #   for tile in tiles:
+  #     if self.rect.colliderect(tile):
+  #       hits.append(tile)
+  #   return hits
+    
+  # def check_collision_x(self, tiles):
+    # for tile in tiles:
+      # if pygame.sprite.collide_rect(self.player, tile):
+      #   print("collided")
+    # collisions = self.get_hits(tiles)
+    # collided = pygame.sprite.spritecollide(self.player, tiles, False)
+      
+    # if len(collided) > 0:
+    #   print("collided!")
+    #   print("in collision_x")
+    #   if self.player.x > 0: # hitting a tile while moving right
+    #     self.player.x = tile.rect.left - self.rect.w
+    #     self.player.rect.x = self.player.x
+      # elif player.self.x < 0: # hitting a tile while moving left
+      #   self.player.x = tile.rect.right
+      #   self.player.rect.x = self.player.x
 
-def title_screen(screen):
-    # Create a display surface
-    screen_surface = pygame.Surface((800,400))
-    # Fill entire background with lavender
-    screen_surface.fill((230,230,250))
-
-    # Title
-    title = pygame.font.Font("pixel_font.ttf", 40)
-    title_surface = title.render("Welcome to the Garden!", False, (115, 79, 150))
-    title_rect = title_surface.get_rect(center = (400, 100))
-
-    # Might need to make another class for the player sprite
-    player = pygame.image.load("player_sprite.png").convert_alpha()
-    player_rect = player.get_rect(center = (400, 200))
-
-    # Start button
-    start_button_img = pygame.image.load("start_button.png").convert_alpha()
-    start_button = Button(100, 200, start_button_img)
-
-    screen.blit(screen_surface, (0,0))
-    screen.blit(title_surface, title_rect)
-    screen.blit(player, player_rect)
-    start_button.draw()
+  # def scroll_x(self):
+  #   # player = self.player
+  #   player_x = self.player.rect[0]  # getting the center of the x position of the player
+  #   direction_x = self.player.dist
+  #   self.player.dist = 0
+    # if direction_x != 0:
+      # print(direction_x)
+    
+  #   if player_x < 200:
+  #     self.world_shift = 8
+  #     player.dist = 0
+          
+  def run(self):
+    # self.tiles.update(-1)
+    
+    # Level tiles
+    self.tiles.draw(self.display_surface)
+    
+    # self.player.draw(self.display_surface)
+    
+    # self.check_collision_x(self.tiles)
+    # self.scroll_x()
