@@ -30,8 +30,8 @@ while True:
     if controller.clicked:
         screen.fill((144, 238, 144))
         controller.handle_keys()
-        view.draw_game()
         level.update()  # draws the map
+        view.draw_game()
         view.draw_player()
 
     # Display the home screen
