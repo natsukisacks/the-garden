@@ -46,7 +46,6 @@ class GardenModel():
             self.rect.centerx = pos[0]
             self.rect.centery = pos[1]
 
-
     class Tile(pygame.sprite.Sprite):
         """
         A class to represent the tiles that make up the game (i.e. all sprites
@@ -222,6 +221,7 @@ class GardenModel():
           self.title_rect: The rectangle around the title text to assist in
             placing the title.
         """
+
         def __init__(self):
             """
             Constructs all necessary attributes for the Start Screen class.
@@ -236,7 +236,6 @@ class GardenModel():
             self.title_surface = title.render(
                 "Welcome to the Garden!", False, (115, 79, 150))
             self.title_rect = self.title_surface.get_rect(center=(400, 100))
-
 
     class Button():
         """
@@ -263,6 +262,7 @@ class GardenModel():
 
 # Create a global player object to avoid making multiple instances.
 player_object = None
+
 
 def get_player():
     """
