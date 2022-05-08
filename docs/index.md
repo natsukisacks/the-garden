@@ -1,4 +1,46 @@
-## Welcome to GitHub Pages
+## Welcome to the Garden!
+In **The Garden** you can walk around, harvest different types of produce, enjoy the beautiful view and music, and maybe even find a secret little creature. There is no main objective, this is just a relaxing, interactive game. 
+
+### Our goal!
+We wanted to make a simple game that would be fun and relaxing, and would also have pretty visuals. In the next steps of our project, we want to add some roleplaying components, and expand the setting to have additional scenes (maybe a mystical forest, or a tavern, or a lake).
+
+### Meet the player character!
+This is who you pay as! You control your character using the left, right, up, and down arrows. 
+
+### The produce!
+Collect produce by walking through it. Don’t worry, you won’t trample the plants. The number of vegetables you have collected will be displayed on the x of the screen.
+
+The pomegranate tree!
+Yum, pomegranate!
+
+### Visualizations!
+We created the visualizations ourselves, using pixilart.com. We were inspired by 2D games, such as Stardew Valley and Undertale, in our design. 
+Start button!
+Press on it to start
+Background
+
+
+### Game Demo!
+[Link to youtube video]
+
+### Download here!
+[link to github repo] 
+To play this game, you can download it from our Github repository here. You will need to have python and pygame installed. Run the following command in your terminal to start the game: 
+$ python main.py
+For more detailed instructions and documentation, read the README file in the repository.
+
+
+
+### Meet the creators!
+Natsuki Sacks 
+Olga Pidruchna
+Olin College of Engineering 25’
+Loves art, boba, and pastel colors.
+
+
+### Credits
+We got our music from x.
+
 
 You can use the [editor on GitHub](https://github.com/olincollege/the-garden) to maintain and preview the content for your website in Markdown files.
 
