@@ -1,20 +1,22 @@
-import pygame, sys
-from player import Player, get_player
-from home_screen import StartScreen, Button
+import pygame
 from settings import *
-from model import Level, Tile
+from model import GardenModel, get_player
+from view import GardenView
+from controller import GardenController
 
 # Display setup
 pygame.init()
-screen = pygame.display.set_mode((800, 400))
+screen = pygame.display.set_mode((800, 500), pygame.FULLSCREEN)
 
-# player = Player((400, 200)) # create an instance
+# need to get classes INSIDE of classes
 player = get_player()
-start_screen = StartScreen()
-button = Button()
+start_screen = GardenModel.StartScreen()
+button = GardenModel.Button()
 clock = pygame.time.Clock()
-level = Level(WORLD_MAP, screen)
-tile = Tile((400, 200))
+level = GardenModel.Level(WORLD_MAP, screen)
+view = GardenView(screen)
+controller = GardenController()
+
 
 while True:
     # handle every event since the last frame
@@ -23,23 +25,20 @@ while True:
             pygame.quit() # quit the screen
             sys.exit()
 
-    # if button.clicked == True:
+    # if controller.clicked == True:
     screen.fill((144, 238, 144))
-    player.handle_keys() # handle_keys() isn't working with the player using level.run()
-        # figure it out later -- for now, use the reg. player draw method to move it around and
-        # test collisions
-    level.run() # draws the map
-      # take out player from map
-    player.check_collision_x(tile.rect)
-    player.draw(screen)
+    controller.handle_keys()
+    view.draw_game()
+    level.update() # draws the map
+    view.draw_player()
 
     # Display the home screen
-    # if button.clicked == False:
-    #   player.handle_keys() # handle the keys
-    #   start_screen.draw()
-    #   button.draw(screen)
-    #   player.draw(screen) # draw the player to the screen
+    # if controller.clicked == False:
+    #   controller.handle_keys() # handle the keys
+    #   view.draw_home()
+    #   controller.update_button()
+    #   view.draw_player()
 
     pygame.display.update()
     
-    clock.tick(60)
+    clock.tick(60) # how to do self.FPS?
