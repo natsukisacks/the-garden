@@ -42,7 +42,12 @@ class GardenView():
         entire level map.
         """
         self.screen.blit(self.level.background, (0, 0))
-        self.level.all_tiles.draw(self.surface)
+        self.level.kill_tiles.draw(self.surface)
+        self.level.static_tiles.draw(self.surface)
+        
+        # Points display
+        pygame.draw.rect(self.surface, (255,248,220), pygame.Rect(30, 440, 100, 50))
+        # self.screen.blit(self.level.points_surface, self.level.points_rect)
 
     def draw_player(self):
         """

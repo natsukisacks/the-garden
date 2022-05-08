@@ -38,7 +38,7 @@ class GardenModel():
             """
             super().__init__()
             image = pygame.image.load(
-                "graphics/player_character.png").convert_alpha()
+                "player_character.png").convert_alpha()
             self.player = pygame.transform.scale(image, (32, 64))
             self.rect = self.player.get_rect(center=pos)
 
@@ -90,15 +90,13 @@ class GardenModel():
                 surface: The surface on which the tiles will be placed.
             """
             self.display_surface = surface
-            background = pygame.image.load("graphics/background.png")
+            background = pygame.image.load("background.png")
             self.background = pygame.transform.scale(background, (800, 500))
             self.display_surface = surface
             self.player = get_player()
-            self.setup_level()
-
+            self.points = 0
             # WIDTH = 1280
             # HEIGHT = 720
-            # FPS = 60
             self.TILESIZE = 32
             self.WORLD_MAP = [
                 [" ", "h", "h", "h", "h", "h", "h", "h", "h", "h", "h", "h", "h",
@@ -106,9 +104,9 @@ class GardenModel():
                 [" ", "v", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
                     " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "v", " "],
                 [" ", "v", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
-                    " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "v", " "],
+                    " ", " ", " ", " ", "S", " ", " ", " ", " ", " ", "v", " "],
                 [" ", "v", " ", " ", " ", " ", " ", " ", "t", " ", " ", " ", " ",
-                    " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "v", " "],
+                    " ", " ", " ", " ", " ", " ", "S", " ", " ", " ", "v", " "],
                 [" ", "v", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
                     " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "v", " "],
                 [" ", "v", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
@@ -118,7 +116,7 @@ class GardenModel():
                 [" ", "v", " ", " ", " ", "t", " ", " ", " ", " ", " ", " ", " ",
                     " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "v", " "],
                 [" ", "v", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
-                    " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "v", " "],
+                    " ", " ", " ", " ", "S", " ", " ", " ", " ", " ", "v", " "],
                 [" ", "v", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
                     " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "v", " "],
                 [" ", "v", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
@@ -132,14 +130,17 @@ class GardenModel():
                 [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
                     " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
             ]
+            self.setup_level()
 
         def setup_level(self):
             """
             Places all of the sprite tiles to where they need to be based on
             the world map. Adds these tiles to the appropriate sprite groups.
             """
-            self.all_tiles = pygame.sprite.Group()
-            self.tree_tiles = pygame.sprite.Group()
+            self.static_tiles = pygame.sprite.Group()
+
+            # Tiles for the player to collect
+            self.kill_tiles = pygame.sprite.Group()
 
             for row_index, row in enumerate(self.WORLD_MAP):
                 for col_index, col in enumerate(row):
@@ -148,54 +149,66 @@ class GardenModel():
 
                     if col == "v":
                         self.vert_border = GardenModel.Tile(
-                            (x_pos, y_pos), "graphics/fence-vertical.png", (16, 40))
-                        self.all_tiles.add(self.vert_border)
+                            (x_pos, y_pos), "fence-vertical.png", (16, 40))
+                        self.static_tiles.add(self.vert_border)
                     if col == "h":
                         self.hor_border = GardenModel.Tile(
-                            (x_pos, y_pos), "graphics/fence-horizontal.png", (32, 45))
-                        self.all_tiles.add(self.hor_border)
+                            (x_pos, y_pos), "fence-horizontal.png", (32, 45))
+                        self.static_tiles.add(self.hor_border)
                     if col == "r":
                         self.right_end_border = GardenModel.Tile(
-                            (x_pos, y_pos), "graphics/fence-right-end.png", (16, 45))
-                        self.all_tiles.add(self.right_end_border)
-                    if col == "T":
-                        self.tree = GardenModel.Tile(
-                            (x_pos, y_pos), "graphics/pom_tree.png", (90, 90))
-                        self.tree_tiles.add(self.tree)
-                        self.all_tiles.add(self.tree)
+                            (x_pos, y_pos), "fence-right-end.png", (16, 45))
+                        self.static_tiles.add(self.right_end_border)
+                    if col == "S":
+                        self.collect = GardenModel.Tile(
+                            (x_pos, y_pos), "tomato.png", (32, 32))
+                        self.kill_tiles.add(self.collect)
 
-        def check_collision(self):
+        # def check_collision(self):
+        #     """
+        #     Checks if the player is colliding with any tiles in a certain
+        #     sprite class and then prevents the player from having free range
+        #     around the tile if applicable.
+        #     """
+        #     for sprite in self.tree_tiles:
+        #         if pygame.sprite.collide_rect(self.player, tree):
+        #             # moving left
+        #             if self.player.rect.left < tree.rect.right:
+        #                 self.player.rect.left = tree.rect.right
+        #             # moving right
+        #             if self.player.rect.right > tree.rect.left:
+        #                 self.player.rect.right = tree.rect.left
+        #             # moving up
+        #             if self.player.rect.top < tree.rect.bottom:
+        #                 self.player.rect.top = tree.rect.bottom
+        #             # moving down
+        #             if self.player.rect.bottom > tree.rect.top:
+        #                 self.player.rect.bottom = tree.rect.top
+
+        def kill(self):
             """
-            Checks if the player is colliding with any tiles in a certain
-            sprite class and then prevents the player from having free range
-            around the tile if applicable.
+            Removes the specified sprite from the sprite list once the player collides with it.
             """
-            # gets rid of trees as you go near them
-            # for tree in self.tree_tiles:
-            #   if pygame.sprite.collide_rect(self.player, tree):
-            #     tree.kill()
-            for tree in self.tree_tiles:
-                if pygame.sprite.collide_rect(self.player, tree):
-                    # moving left
-                    if self.player.rect.left < tree.rect.right:
-                        self.player.rect.left = tree.rect.right
-                    # moving right
-                    if self.player.rect.right > tree.rect.left:
-                        self.player.rect.right = tree.rect.left
-                    # moving up
-                    if self.player.rect.top < tree.rect.bottom:
-                        self.player.rect.top = tree.rect.bottom
-                    # moving down
-                    if self.player.rect.bottom > tree.rect.top:
-                        self.player.rect.bottom = tree.rect.top
+            for collect in self.kill_tiles:
+                if pygame.sprite.collide_rect(self.player, collect):
+                    collect.kill()
+                    # print(self.kill_tiles)  # the tiles are being removed from the list but are still showing up
+                    self.points += 1
+                    print(self.points)
+
+        def points(self):
+            points = pygame.font.Font("pixel_text.ttf", 40)
+            self.points_surface = points.render("Test", False, (115, 79, 150))
+            self.points_rect = self.points_surface.get_rect(center=(400, 100))
 
         def update(self):
             """
             Checks if the player is colliding with any tiles.
             """
-            self.check_collision()
+            # self.check_collision()
+            self.kill()
 
-    screen = pygame.display.set_mode((800, 500))
+    screen = pygame.display.set_mode((800, 400))
 
     class StartScreen():
         """
@@ -214,12 +227,12 @@ class GardenModel():
             Constructs all necessary attributes for the Start Screen class.
             """
             # Create a display surface
-            self.screen_surface = pygame.Surface((800, 500))
+            self.screen_surface = pygame.Surface((800, 400))
             # Fill entire background with lavender
             self.screen_surface.fill((230, 230, 250))
 
             # Title
-            title = pygame.font.Font("graphics/pixel_text.ttf", 40)
+            title = pygame.font.Font("pixel_text.ttf", 40)
             self.title_surface = title.render(
                 "Welcome to the Garden!", False, (115, 79, 150))
             self.title_rect = self.title_surface.get_rect(center=(400, 100))
@@ -242,7 +255,7 @@ class GardenModel():
             Contructs all of the necessary attributes for the Button class.
             """
             start_button = pygame.image.load(
-                "graphics/start_button.png").convert_alpha()
+                "start_button.png").convert_alpha()
             self.start_button = pygame.transform.scale(start_button, (130, 64))
             self.rect = self.start_button.get_rect(center=(400, 300))
 
