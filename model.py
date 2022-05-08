@@ -160,7 +160,7 @@ class GardenModel():
                         self.all_tiles.add(self.right_end_border)
                     if col == "T":
                         self.tree = GardenModel.Tile(
-                            (x_pos, y_pos), "graphics/mantis_shrimp.webp", (90, 90))
+                            (x_pos, y_pos), "graphics/pom_tree.png", (90, 90))
                         self.tree_tiles.add(self.tree)
                         self.all_tiles.add(self.tree)
 
