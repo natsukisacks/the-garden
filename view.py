@@ -5,7 +5,7 @@ import pygame
 class GardenView():
   def __init__(self, surface):
     self.surface = surface
-    self.screen = pygame.display.set_mode((800, 400))
+    self.screen = pygame.display.set_mode((800, 500))
     self.level = GardenModel.Level(WORLD_MAP, self.surface)
     self.player = get_player()
     self.button = GardenModel.Button()

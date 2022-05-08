@@ -6,7 +6,7 @@ from controller import GardenController
 
 # Display setup
 pygame.init()
-screen = pygame.display.set_mode((800, 500), pygame.FULLSCREEN)
+screen = pygame.display.set_mode((800, 500))  # , pygame.FULLSCREEN)
 
 # need to get classes INSIDE of classes
 player = get_player()
@@ -22,14 +22,14 @@ while True:
     # handle every event since the last frame
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            pygame.quit() # quit the screen
+            pygame.quit()  # quit the screen
             sys.exit()
 
     # if controller.clicked == True:
     screen.fill((144, 238, 144))
     controller.handle_keys()
     view.draw_game()
-    level.update() # draws the map
+    level.update()  # draws the map
     view.draw_player()
 
     # Display the home screen
@@ -40,5 +40,5 @@ while True:
     #   view.draw_player()
 
     pygame.display.update()
-    
-    clock.tick(60) # how to do self.FPS?
+
+    clock.tick(60)  # how to do self.FPS?
