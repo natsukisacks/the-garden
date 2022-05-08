@@ -33,11 +33,11 @@ while True:
     view.draw_player()
 
     # Display the home screen
-    # if controller.clicked == False:
-    #   controller.handle_keys() # handle the keys
-    #   view.draw_home()
-    #   controller.update_button()
-    #   view.draw_player()
+    if controller.clicked == False:
+        controller.handle_keys()  # handle the keys
+        view.draw_home()
+        controller.update_button()
+        view.draw_player()
 
     pygame.display.update()
 

@@ -146,7 +146,7 @@ class GardenModel():
             """
             self.check_collision()
 
-    screen = pygame.display.set_mode((800, 400))
+    screen = pygame.display.set_mode((800, 500))
 
     class StartScreen():
         """
@@ -163,7 +163,7 @@ class GardenModel():
             Constructs all necessary attributes for the Start Screen class.
             """
             # Create a display surface
-            self.screen_surface = pygame.Surface((800, 400))
+            self.screen_surface = pygame.Surface((800, 500))
             # Fill entire background with lavender
             self.screen_surface.fill((230, 230, 250))
 
