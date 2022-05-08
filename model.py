@@ -85,7 +85,7 @@ class GardenModel():
             self.display_surface = surface
             self.setup_level(level_map)
             self.player = get_player()
-            background = pygame.image.load("graphics/background.png")
+            background = pygame.image.load("graphics/background-test.png")
             self.background = pygame.transform.scale(background, (800, 500))
             self.display_surface = surface
             self.setup_level(level_map)
