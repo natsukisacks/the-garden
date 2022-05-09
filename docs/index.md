@@ -6,8 +6,7 @@ We wanted to make a simple game that would be fun and relaxing, and that would a
 
 ### Meet the player character!
 This is who you pay as. You control your character using the left, right, up, and down arrows. 
-![This is an image](graphics/player_character.png)
-<img src="website-images/game-components-player.png" width = "15%" height = "15%" style="float:left;margin:0px 30px">
+<img src="graphics/player_character.png" width = "15%" height = "15%" style="float:left;margin:0px 30px">
 
 ### The produce!
 Collect produce by walking through it. Don’t worry, you won’t trample the plants. The number of vegetables you have collected will be displayed on the bottom left of the screen. Collect 20 vegetables to win a fun prize.
@@ -71,6 +70,7 @@ Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://j
 
 ### Markdown
 
+![This is an image](graphics/player_character.png)
 
 ```markdown
 Syntax highlighted code block
