@@ -4,8 +4,8 @@ interactive game.
 """
 import sys
 import pygame
-from model import GardenModel, get_player
-from view import GardenView
+from model import GardenModel
+from view import GardenView, music
 from controller import GardenController
 
 # Display setup
@@ -13,8 +13,7 @@ pygame.init()
 screen = pygame.display.set_mode((800, 500))
 
 # Create instances of various classes
-model = GardenModel() # to use in instances of GardenModel subclasses
-player = get_player()
+model = GardenModel()  # to use in instances of GardenModel subclasses
 start_screen = model.StartScreen()
 button = model.Button()
 clock = pygame.time.Clock()
@@ -23,7 +22,7 @@ view = GardenView(screen, model)
 controller = GardenController(model)
 
 # Our background music
-view.music()
+music()
 
 while True:
     # handle every event since the last frame

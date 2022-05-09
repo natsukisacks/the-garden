@@ -3,8 +3,8 @@ Garden view class. Everything in this file contains elements belonging
 to the view portion of the MVC architecture.
 """
 import pygame
-from model import get_player
 from pygame import mixer
+from model import get_player
 
 
 class GardenView():
@@ -65,10 +65,11 @@ class GardenView():
         self.screen.blit(self.start.title_surface, self.start.title_rect)
         self.screen.blit(self.button.start_button, self.button.rect)
 
-    def music(self):
-        """
-        Loads the background music file and plays it on repeat.
-        """
-        mixer.init()
-        mixer.music.load("graphics/background_music.ogg")
-        mixer.music.play(-1)
+
+def music():
+    """
+    Loads the background music file and plays it on repeat.
+    """
+    mixer.init()
+    mixer.music.load("graphics/background_music.ogg")
+    mixer.music.play(-1)

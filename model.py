@@ -2,6 +2,8 @@
 Garden model class. Everything in this file contains elements belonging
 to the model portion of the MVC architecture.
 """
+# pylint: disable=too-few-public-methods, too-many-instance-attributes, global-statement
+
 import pygame
 from pygame import mixer
 mixer.init()
@@ -87,6 +89,8 @@ class GardenModel():
         display_surface: The background surface on which all other visuals
           will be placed.
         background: The image scaled for the background.
+        shrimp: scaled image of shrimp
+        shrimp_rect: rectangle as defined by shrimp
         player: A global instance of the Player class.
         points: An integer representing the number of produce that the player
           has collected so far.
@@ -109,6 +113,12 @@ class GardenModel():
             self.display_surface = surface
             background = pygame.image.load("graphics/background-7.png")
             self.background = pygame.transform.scale(background, (800, 500))
+
+            # loading in shrimp image
+            shrimp = pygame.image.load("graphics/mantis_shrimp.webp")
+            self.shrimp = pygame.transform.scale(shrimp, (100, 100))
+            self.shrimp_rect = self.shrimp.get_rect(center=(400, 100))
+
             self.player = get_player()
             self.points = 0
             self.tilesize = 32
@@ -182,18 +192,18 @@ class GardenModel():
                     # Instantiating all of the sprites to their positions
                     if col == "v":
                         self.vert_border = GardenModel.Tile(
-                            (x_pos, y_pos), "graphics/fence-vertical.png",\
-                              (16, 40))
+                            (x_pos, y_pos), "graphics/fence-vertical.png",
+                            (16, 40))
                         self.static_tiles.add(self.vert_border)
                     if col == "h":
                         self.hor_border = GardenModel.Tile(
-                            (x_pos, y_pos), "graphics/fence-horizontal.png",\
-                              (32, 45))
+                            (x_pos, y_pos), "graphics/fence-horizontal.png",
+                            (32, 45))
                         self.static_tiles.add(self.hor_border)
                     if col == "r":
                         self.right_end_border = GardenModel.Tile(
-                            (x_pos, y_pos), "graphics/fence-right-end.png",\
-                              (16, 45))
+                            (x_pos, y_pos), "graphics/fence-right-end.png",
+                            (16, 45))
                         self.static_tiles.add(self.right_end_border)
                     if col == "P":
                         self.pom_tree = GardenModel.Tile(
@@ -213,8 +223,8 @@ class GardenModel():
                         self.veggie_tiles.add(self.potato)
                     if col == "s":
                         self.spotato = GardenModel.Tile(
-                            (x_pos, y_pos), "graphics/sweet potato.png",\
-                              (32, 16))
+                            (x_pos, y_pos), "graphics/sweet potato.png",
+                            (32, 16))
                         self.veggie_tiles.add(self.spotato)
                     if col == "T":
                         self.tomato = GardenModel.Tile(
@@ -276,9 +286,6 @@ class GardenModel():
                                  pygame.Rect(0, 0, 800, 500))
                 self.draw_text("Congratulations! You win a mantis shrimp!", 50,
                                (0, 0, 0), (400, 250))
-                shrimp = pygame.image.load("graphics/mantis_shrimp.webp")
-                self.shrimp = pygame.transform.scale(shrimp, (100, 100))
-                self.shrimp_rect = self.shrimp.get_rect(center=(400, 100))
                 self.display_surface.blit(self.shrimp, self.shrimp_rect)
                 self.gameover = True
             else:
@@ -292,7 +299,6 @@ class GardenModel():
 
     screen = pygame.display.set_mode((800, 400))
 
-
     class StartScreen():
         """
         A class to represent the start screen of the game.
@@ -304,6 +310,7 @@ class GardenModel():
           title_rect: The rectangle around the title text to assist in
             placing the title.
         """
+
         def __init__(self):
             """
             Constructs all necessary attributes for the Start Screen class.
@@ -320,7 +327,6 @@ class GardenModel():
                 "Welcome to the Garden!", False, (115, 79, 150))
             self.title_rect = self.title_surface.get_rect(center=(400, 100))
 
-
     class Button():
         """
         A class to represent the start button.
@@ -329,6 +335,7 @@ class GardenModel():
           start_button: The start button created by scaling a PNG file image.
           rect: The rectangle around the start button to help in placing it.
         """
+
         def __init__(self):
             """
             Contructs all of the necessary attributes for the Button class.
@@ -341,6 +348,7 @@ class GardenModel():
 
 # Create a global player object to avoid making multiple instances.
 PLAYER_OBJECT = None
+
 
 def get_player():
     """

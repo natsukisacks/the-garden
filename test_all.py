@@ -1,7 +1,6 @@
 """
 Unit tests for The Garden.
 """
-from telnetlib import GA
 import pytest
 import pygame
 from model import GardenModel
@@ -50,9 +49,7 @@ def test_collide(player_coords, tile_coords, points):
         tile_coords, "graphics/potato.png", (32, 16))
 
     level_example.player = player_example
-    level_example.kill_tiles.add(tile_example)
+    level_example.veggie_tiles.add(tile_example)
 
     level_example.delete_produce()
     assert level_example.points == points
-    # pylint questions
-    # test veggie pick up
