@@ -18,13 +18,13 @@ class GardenController():
         class.
       self.player: A global instance of the player class.
     """
-    def __init__(self):
+    def __init__(self, model):
         """
         Constructs all necessary attributes for the controller class.
         """
         # For use in update_button
         self.clicked = False
-        self.button = GardenModel.Button()
+        self.button = model.Button()
         self.player = get_player()
 
     def update_button(self):

@@ -11,14 +11,14 @@ from controller import GardenController
 pygame.init()
 screen = pygame.display.set_mode((800, 500))  # , pygame.FULLSCREEN)
 
+model = GardenModel()
 player = get_player()
-start_screen = GardenModel.StartScreen()
-button = GardenModel.Button()
+start_screen = model.StartScreen()
+button = model.Button()
 clock = pygame.time.Clock()
-level = GardenModel.Level(screen)
-view = GardenView(screen)
-controller = GardenController()
-
+level = model.Level(screen)
+view = GardenView(screen, model)
+controller = GardenController(model)
 
 while True:
     # handle every event since the last frame
@@ -30,9 +30,9 @@ while True:
     if controller.clicked:
         screen.fill((144, 238, 144))
         controller.handle_keys()
-        level.update()  # draws the map
         view.draw_game()
         view.draw_player()
+        level.update(screen)  # draws the map
 
     # Display the home screen
     if controller.clicked is False:

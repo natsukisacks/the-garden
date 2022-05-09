@@ -22,7 +22,7 @@ class GardenView():
         self.start: An instance of the StartScreen class within the GardenModel
             class.
     """
-    def __init__(self, surface):
+    def __init__(self, surface, model):
         """
         Constructs all necessary attributes for the view class.
 
@@ -31,10 +31,10 @@ class GardenView():
         """
         self.surface = surface
         self.screen = pygame.display.set_mode((800, 500))
-        self.level = GardenModel.Level(self.surface)
+        self.level = model.Level(self.surface)
         self.player = get_player()
-        self.button = GardenModel.Button()
-        self.start = GardenModel.StartScreen()
+        self.button = model.Button()
+        self.start = model.StartScreen()
 
     def draw_game(self):
         """
@@ -42,12 +42,16 @@ class GardenView():
         entire level map.
         """
         self.screen.blit(self.level.background, (0, 0))
-        self.level.kill_tiles.draw(self.surface)
         self.level.static_tiles.draw(self.surface)
-        
+        points = 0
         # Points display
-        pygame.draw.rect(self.surface, (255,248,220), pygame.Rect(30, 440, 100, 50))
-        # self.screen.blit(self.level.points_surface, self.level.points_rect)
+        pygame.draw.rect(self.surface, (255,248,220), pygame.Rect(10, 460, 125, 50))
+
+        # # Draw points text
+        # self.draw_text(f"collected: {points}", 22, (0, 0, 0), (70, 470))
+        
+        # points = 3 - len(self.level.kill_tiles)
+        # # print(self.level.points)
 
     def draw_player(self):
         """
