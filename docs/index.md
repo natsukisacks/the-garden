@@ -7,6 +7,7 @@ We wanted to make a simple game that would be fun and relaxing, and that would a
 ### Meet the player character!
 This is who you pay as. You control your character using the left, right, up, and down arrows. 
 ![This is an image](graphics/player_character.png)
+<img src="website-images/game-components-player.png" width = "15%" height = "15%" style="float:left;margin:0px 30px">
 
 ### The produce!
 Collect produce by walking through it. Don’t worry, you won’t trample the plants. The number of vegetables you have collected will be displayed on the bottom left of the screen. Collect 20 vegetables to win a fun prize.
@@ -28,7 +29,8 @@ We created the visualizations ourselves, using pixilart.com. We were inspired by
 The game opens with a start screen. Click on the start button to begin. Then, use your up, down, left, and right arrows to control the character's movement. Your goal is to eat as many vegetables from the garden as possible by walking through them.
 
 ### Game Demo!
-[Link to youtube video]
+<iframe width="560" height="315" src="https://youtu.be/-90kkBX34ZA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<br>
 
 ## Download here!
 [link to github repo] 
