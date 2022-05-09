@@ -6,6 +6,7 @@ We wanted to make a simple game that would be fun and relaxing, and would also h
 
 ### Meet the player character!
 This is who you pay as! You control your character using the left, right, up, and down arrows. 
+![This is an image](graphics/player_character.png)
 
 ### The produce!
 Collect produce by walking through it. Don’t worry, you won’t trample the plants. The number of vegetables you have collected will be displayed on the x of the screen.
