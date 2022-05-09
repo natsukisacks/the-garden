@@ -3,7 +3,7 @@ Garden view class. Everything in this file contains elements belonging
 to the view portion of the MVC architecture.
 """
 import pygame
-from model import GardenModel, get_player #Tile, Level, StartScreen, Button, get_player
+from model import get_player  # GardenModel
 
 
 class GardenView():
@@ -22,6 +22,7 @@ class GardenView():
         self.start: An instance of the StartScreen class within the GardenModel
             class.
     """
+
     def __init__(self, surface, model):
         """
         Constructs all necessary attributes for the view class.
@@ -43,13 +44,14 @@ class GardenView():
         """
         self.screen.blit(self.level.background, (0, 0))
         self.level.static_tiles.draw(self.surface)
-        points = 0
+        # points = 0
         # Points display
-        pygame.draw.rect(self.surface, (255,248,220), pygame.Rect(10, 460, 125, 50))
+        pygame.draw.rect(self.surface, (255, 248, 220),
+                         pygame.Rect(10, 460, 125, 50))
 
         # # Draw points text
         # self.draw_text(f"collected: {points}", 22, (0, 0, 0), (70, 470))
-        
+
         # points = 3 - len(self.level.kill_tiles)
         # # print(self.level.points)
 
@@ -57,13 +59,14 @@ class GardenView():
         """
         Visualizes the player on the screen.
         """
-        self.surface.blit(self.player.player, (self.player.rect.centerx, self.player.rect.centery))
+        self.surface.blit(self.player.player,
+                          (self.player.rect.centerx, self.player.rect.centery))
 
     def draw_home(self):
         """
         Visualizes the home screen, which includes the button, title, and
         background.
         """
-        self.screen.blit(self.start.screen_surface, (0,0))
+        self.screen.blit(self.start.screen_surface, (0, 0))
         self.screen.blit(self.start.title_surface, self.start.title_rect)
         self.screen.blit(self.button.start_button, self.button.rect)

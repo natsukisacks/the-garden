@@ -3,7 +3,7 @@ Garden controller class. Everything in this file contains elements belonging
 to the controller portion of the MVC architecture.
 """
 import pygame
-from model import GardenModel, get_player
+from model import get_player  # GardenModel
 
 
 class GardenController():
@@ -18,6 +18,7 @@ class GardenController():
         class.
       self.player: A global instance of the player class.
     """
+
     def __init__(self, model):
         """
         Constructs all necessary attributes for the controller class.
@@ -55,13 +56,13 @@ class GardenController():
         sprite moves across the background accordingly.
         """
         key = pygame.key.get_pressed()
-        self.player.dist = 3 # distance moved in 1 frame
+        self.player.dist = 3  # distance moved in 1 frame
 
-        if key[pygame.K_DOWN] and self.player.rect.centery < 400: # down key
-            self.player.rect.centery += self.player.dist # move down
-        elif key[pygame.K_UP] and self.player.rect.centery > 70: # up key
-            self.player.rect.centery -= self.player.dist # move up
-        if key[pygame.K_RIGHT] and self.player.rect.centerx < 736: # right key
-            self.player.rect.centerx += self.player.dist # move right
-        elif key[pygame.K_LEFT] and self.player.rect.centerx > 70: # left key
-            self.player.rect.centerx -= self.player.dist # move left
+        if key[pygame.K_DOWN] and self.player.rect.centery < 400:  # down key
+            self.player.rect.centery += self.player.dist  # move down
+        elif key[pygame.K_UP] and self.player.rect.centery > 70:  # up key
+            self.player.rect.centery -= self.player.dist  # move up
+        if key[pygame.K_RIGHT] and self.player.rect.centerx < 736:  # right key
+            self.player.rect.centerx += self.player.dist  # move right
+        elif key[pygame.K_LEFT] and self.player.rect.centerx > 70:  # left key
+            self.player.rect.centerx -= self.player.dist  # move left

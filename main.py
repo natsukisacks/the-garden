@@ -2,7 +2,8 @@
 Calls of the class and method instances necessary to properly display the
 interactive game.
 """
-import pygame, sys
+import sys
+import pygame
 from model import GardenModel, get_player
 from view import GardenView
 from controller import GardenController
@@ -28,15 +29,14 @@ while True:
             sys.exit()
 
     if controller.clicked:
-        screen.fill((144, 238, 144))
         controller.handle_keys()
         view.draw_game()
         view.draw_player()
-        level.update(screen)  # draws the map
+        level.update()  # draws the map
 
     # Display the home screen
     if controller.clicked is False:
-        controller.handle_keys() # handle the keys
+        controller.handle_keys()  # handle the keys
         view.draw_home()
         controller.update_button()
         view.draw_player()

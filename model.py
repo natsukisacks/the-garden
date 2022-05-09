@@ -38,14 +38,13 @@ class GardenModel():
             """
             super().__init__()
             image = pygame.image.load(
-                "player_character.png").convert_alpha()
+                "graphics/player_character.png").convert_alpha()
             self.player = pygame.transform.scale(image, (32, 64))
             self.rect = self.player.get_rect(center=pos)
 
             # Player's initial position
             self.rect.centerx = pos[0]
             self.rect.centery = pos[1]
-
 
     class Tile(pygame.sprite.Sprite):
         """
@@ -91,59 +90,60 @@ class GardenModel():
                 surface: The surface on which the tiles will be placed.
             """
             self.display_surface = surface
-            background = pygame.image.load("background_test.png")
+            background = pygame.image.load("graphics/background-test.png")
             self.background = pygame.transform.scale(background, (800, 500))
             self.player = get_player()
             self.points = 0
             self.win_screen = GardenModel.WinScreen()
-            self.TILESIZE = 32
-            self.WORLD_MAP = [
-                [" ", "h", "h", "h", "h", "h", "h", "h", "h", "h", "h", "h",\
-                  "h", "h", "h", "h", "h", "h", "h", "h", "h", "h", "h", "r",\
-                  " "],
-                [" ", "v", " ", " ", " ", " ", " ", "P", " ", " ", " ", " ",\
-                  " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "v",\
+            self.tilesize = 32
+            self.gameover = False
+            self.world_map = [
+                [" ", "h", "h", "h", "h", "h", "h", "h", "h", "h", "h", "h",
+                 "h", "h", "h", "h", "h", "h", "h", "h", "h", "h", "h", "r",
+                 " "],
+                [" ", "v", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
+                 " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "v",
                     " "],
-                [" ", "v", " ", " ", "c", "p", " ", " ", " ", " ", " ", " ",\
-                  " ", " ", " ", "T", " ", " ", " ", "p", "c", "c", " ", "v",\
-                  " "],
-                [" ", "v", " ", " ", " ", " ", " ", " ", "t", " ", " ", " ",\
-                  " ", " ", " ", "w", " ", " ", " ", "T", " ", " ", " ", "v",\
+                [" ", "v", " ", " ", "c", "p", " ", " ", " ", " ", " ", " ",
+                 " ", " ", "T", " ", "T", " ", "T", " ", "T", " ", " ", "v",
+                 " "],
+                [" ", "v", " ", " ", " ", " ", " ", "P", "t", " ", " ", " ",
+                 " ", " ", " ", "T", " ", "T", " ", "T", " ", "T", " ", "v",
                     " "],
-                [" ", "v", " ", " ", "p", " ", "w", " ", " ", " ", " ", " ",\
-                  " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "v",\
+                [" ", "v", " ", " ", "p", "", "w", " ", " ", " ", " ", " ",
+                 " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "v",
                     " "],
-                [" ", "v", " ", " ", "c", " ", " ", " ", " ", " ", " ", " ",\
-                  " ", " ", " ", "t", " ", " ", " ", "s", " ", " ", " ", "v",\
+                [" ", "v", " ", " ", "c", " ", " ", " ", " ", " ", " ", " ",
+                 " ", " ", " ", "t", " ", " ", " ", "s", " ", " ", " ", "v",
                     " "],
-                [" ", "v", " ", " ", " ", " ", "w", " ", " ", " ", "c", " ",\
-                  " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "v",\
+                [" ", "v", " ", " ", " ", " ", "w", " ", " ", " ", " ", " ",
+                 " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "v",
                     " "],
-                [" ", "v", " ", " ", "p", "t", " ", " ", " ", " ", "c", " ",\
-                  " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "v",\
+                [" ", "v", " ", " ", "p", "t", " ", " ", " ", " ", " ", " ",
+                 " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "v",
                     " "],
-                [" ", "v", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",\
-                  " ", " ", " ", " ", " ", " ", " ", " ", "s", " ", "p", "v",\
+                [" ", "v", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
+                 " ", " ", " ", " ", " ", " ", " ", " ", "s", " ", " ", "v",
                     " "],
-                [" ", "v", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",\
-                  " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "v",\
+                [" ", "v", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
+                 " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "v",
                     " "],
-                [" ", "v", " ", " ", " ", "w", " ", "p", " ", " ", " ", " ",\
-                  " ", "c", " ", "w", " ", " ", " ", "c", " ", "p", " ", "v",\
+                [" ", "v", " ", " ", " ", "w", " ", "p", " ", " ", " ", " ",
+                 " ", "c", " ", "w", " ", " ", " ", "c", " ", "p", " ", "v",
                     " "],
-                [" ", "v", " ", " ", "s", " ", "t", " ", " ", " ", " ", " ",\
-                  " ", "t", " ", "p", " ", " ", " ", " ", "T", " ", " ", "v",\
+                [" ", "v", " ", " ", "s", " ", "t", " ", " ", " ", " ", " ",
+                 " ", "t", " ", "p", " ", " ", " ", " ", "T", " ", " ", "v",
                     " "],
-                [" ", "v", " ", " ", " ", "T", " ", " ", " ", " ", " ", " ",\
-                  " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "v",\
+                [" ", "v", " ", " ", " ", "T", " ", " ", " ", " ", " ", " ",
+                 " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "v",
                     " "],
-                [" ", "h", "h", "h", "h", "h", "h", "h", "h", "h", "h", "h",\
-                  "h", "h", "h", "h", "h", "h", "h", "h", "h", "h", "h", "r",\
+                [" ", "h", "h", "h", "h", "h", "h", "h", "h", "h", "h", "h",
+                 "h", "h", "h", "h", "h", "h", "h", "h", "h", "h", "h", "r",
                     " "],
-                [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",\
-                  " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",\
+                [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
+                 " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ",
                     " "],
-                ]
+            ]
             self.setup_level()
 
         def setup_level(self):
@@ -156,50 +156,50 @@ class GardenModel():
             # Tiles for the player to collect
             self.kill_tiles = pygame.sprite.Group()
 
-            for row_index, row in enumerate(self.WORLD_MAP):
+            for row_index, row in enumerate(self.world_map):
                 for col_index, col in enumerate(row):
-                    x_pos = col_index * self.TILESIZE
-                    y_pos = row_index * self.TILESIZE
+                    x_pos = col_index * self.tilesize
+                    y_pos = row_index * self.tilesize
 
                     if col == "v":
                         self.vert_border = GardenModel.Tile(
-                            (x_pos, y_pos), "fence-vertical.png", (16, 40))
+                            (x_pos, y_pos), "graphics/fence-vertical.png", (16, 40))
                         self.static_tiles.add(self.vert_border)
                     if col == "h":
                         self.hor_border = GardenModel.Tile(
-                            (x_pos, y_pos), "fence-horizontal.png", (32, 45))
+                            (x_pos, y_pos), "graphics/fence-horizontal.png", (32, 45))
                         self.static_tiles.add(self.hor_border)
                     if col == "r":
                         self.right_end_border = GardenModel.Tile(
-                            (x_pos, y_pos), "fence-right-end.png", (16, 45))
+                            (x_pos, y_pos), "graphics/fence-right-end.png", (16, 45))
                         self.static_tiles.add(self.right_end_border)
                     if col == "P":
                         self.pom_tree = GardenModel.Tile(
-                            (x_pos, y_pos), "pom tree.png", (200, 200))
+                            (x_pos, y_pos), "graphics/pom_tree.png", (200, 200))
                         self.static_tiles.add(self.pom_tree)
                     if col == "p":
                         self.peas = GardenModel.Tile(
-                            (x_pos, y_pos), "peas.png", (32, 32))
+                            (x_pos, y_pos), "graphics/peas.png", (32, 32))
                         self.kill_tiles.add(self.peas)
                     if col == "w":
                         self.watermelon = GardenModel.Tile(
-                            (x_pos, y_pos), "watermelon.png", (32, 32))
+                            (x_pos, y_pos), "graphics/watermelon.png", (32, 32))
                         self.kill_tiles.add(self.watermelon)
                     if col == "t":
                         self.potato = GardenModel.Tile(
-                            (x_pos, y_pos), "potato.png", (32, 16))
+                            (x_pos, y_pos), "graphics/potato.png", (32, 16))
                         self.kill_tiles.add(self.potato)
                     if col == "s":
                         self.spotato = GardenModel.Tile(
-                            (x_pos, y_pos), "sweet potato.png", (32, 16))
+                            (x_pos, y_pos), "graphics/sweet potato.png", (32, 16))
                         self.kill_tiles.add(self.spotato)
                     if col == "T":
                         self.tomato = GardenModel.Tile(
-                            (x_pos, y_pos), "tomato.png", (32, 32))
+                            (x_pos, y_pos), "graphics/tomato.png", (25, 25))
                         self.kill_tiles.add(self.tomato)
                     if col == "c":
                         self.collect = GardenModel.Tile(
-                            (x_pos, y_pos), "carrot.png", (16, 45))
+                            (x_pos, y_pos), "graphics/carrot.png", (16, 45))
                         self.kill_tiles.add(self.collect)
 
         def draw_text(self, text, font_size, color, coords):
@@ -213,7 +213,7 @@ class GardenModel():
                     text on the screen.
             """
             # Set font
-            font = pygame.font.Font("pixel_text.ttf", font_size)
+            font = pygame.font.Font("graphics/pixel_text.ttf", font_size)
 
             # Define a surface with the specified text, color, and font
             text_surface = font.render(text, True, color)
@@ -223,14 +223,14 @@ class GardenModel():
             text_rect.midtop = coords
             self.display_surface.blit(text_surface, text_rect)
 
-        def delete_produce(self, surface):
+        def delete_produce(self):
             """
             Removes the specified sprite from the sprite list once the player
             collides with it.
             """
             self.kill_tiles.draw(self.display_surface)
-            self.draw_text(f"collected: {self.points}", 35, (0, 0, 0),\
-              (70, 470))
+            self.draw_text(f"collected: {self.points}", 35, (0, 0, 0),
+                           (70, 470))
             for produce in self.kill_tiles:
                 if pygame.sprite.collide_rect(self.player, produce):
                     produce.kill()
@@ -239,20 +239,24 @@ class GardenModel():
             # Once the player gets enough produce, they win
             if self.points > 20:
                 # self.win_screen
-                pygame.draw.rect(self.display_surface, (255, 248, 220),\
-                  pygame.Rect(0, 0, 800, 500))
-                self.draw_text(f"Congratulations! You win a shrimp", 50,\
-                  (0,0,0), (400, 250))
-                shrimp = pygame.image.load("tomato.png")  # change this to shrimp png
+                pygame.draw.rect(self.display_surface, (255, 248, 220),
+                                 pygame.Rect(0, 0, 800, 500))
+                self.draw_text("Congratulations! You win a mantis shrimp!", 50,
+                               (0, 0, 0), (400, 250))
+                # change this to shrimp png
+                shrimp = pygame.image.load("graphics/mantis_shrimp.webp")
                 self.shrimp = pygame.transform.scale(shrimp, (100, 100))
-                self.shrimp_rect = self.shrimp.get_rect(center = (400, 100))
+                self.shrimp_rect = self.shrimp.get_rect(center=(400, 100))
                 self.display_surface.blit(self.shrimp, self.shrimp_rect)
+                self.gameover = True
+            else:
+                self.gameover = False
 
-        def update(self, surface):
+        def update(self):
             """
             Checks if the player is colliding with any tiles.
             """
-            self.delete_produce(surface)
+            self.delete_produce()
 
     screen = pygame.display.set_mode((800, 400))
 
@@ -267,6 +271,7 @@ class GardenModel():
           self.title_rect: The rectangle around the title text to assist in
             placing the title.
         """
+
         def __init__(self):
             """
             Constructs all necessary attributes for the Start Screen class.
@@ -277,10 +282,10 @@ class GardenModel():
             self.screen_surface.fill((230, 230, 250))
 
             # Title
-            title = pygame.font.Font("pixel_text.ttf", 40)
-            self.title_surface = title.render("Welcome to the Garden!", False, (115, 79, 150))
+            title = pygame.font.Font("graphics/pixel_text.ttf", 40)
+            self.title_surface = title.render(
+                "Welcome to the Garden!", False, (115, 79, 150))
             self.title_rect = self.title_surface.get_rect(center=(400, 100))
-
 
     class Button():
         """
@@ -300,23 +305,37 @@ class GardenModel():
             Contructs all of the necessary attributes for the Button class.
             """
             start_button = pygame.image.load(
-                "start_button.png").convert_alpha()
+                "graphics/start_button.png").convert_alpha()
             self.start_button = pygame.transform.scale(start_button, (130, 64))
             self.rect = self.start_button.get_rect(center=(400, 300))
 
     class WinScreen():
+        """
+        A class to represent the win screen of the game.
+
+          Attributes:
+            self.screen_surface: A screen that serves as a surface to build the
+              win screen off of.
+            self.win_surface: The surface of the win text.
+            self.win_rect: The rectangle around the win text to assist in
+              placing the title.
+        """
+
         def __init__(self):
             self.screen_surface = pygame.Surface((800, 500))
             self.screen_surface.fill((230, 230, 250))
 
-            win = pygame.font.Font("pixel_text.ttf", 70)
-            self.win_surface = win.render("Congratulations! You win a shrimp.",\
-              False, (115, 79, 150))
-            self.win_rect = self.win_surface.get_rect(center = (400, 200))
+            win = pygame.font.Font("graphics/pixel_text.ttf", 70)
+            self.win_surface = win.render("Congratulations! You win a shrimp.",
+                                          False, (115, 79, 150))
+            self.win_rect = self.win_surface.get_rect(center=(400, 200))
 
             self.screen_surface.blit(self.win_surface, self.win_rect)
+
+
 # Create a global player object to avoid making multiple instances.
-player_object = None
+PLAYER_OBJECT = None
+
 
 def get_player():
     """
@@ -324,13 +343,13 @@ def get_player():
     the same class.
 
     Returns:
-    player_object: An instance of the Player class. If the player_object has not
+    PLAYER_OBJECT: An instance of the Player class. If the PLAYER_OBJECT has not
     already been created, it is created. If it has, the function returns a
     global instance.
     """
-    global player_object
+    global PLAYER_OBJECT
 
-    if player_object is None:
-        player_object = GardenModel.Player((380, 160))
+    if PLAYER_OBJECT is None:
+        PLAYER_OBJECT = GardenModel.Player((380, 160))
 
-    return player_object
+    return PLAYER_OBJECT
