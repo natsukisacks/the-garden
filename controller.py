@@ -3,7 +3,7 @@ Garden controller class. Everything in this file contains elements belonging
 to the controller portion of the MVC architecture.
 """
 import pygame
-from model import get_player  # GardenModel
+from model import get_player
 
 
 class GardenController():
@@ -12,11 +12,11 @@ class GardenController():
     the game.
 
     Attributes:
-      self.clicked: A boolean representing whether the start button has been
+      clicked: A boolean representing whether the start button has been
         clicked or not.
-      self.button: A class instance of the Button class within the GardenModel
+      button: A class instance of the Button class within the GardenModel
         class.
-      self.player: A global instance of the player class.
+      player: A global instance of the player class.
     """
 
     def __init__(self, model):
@@ -33,7 +33,7 @@ class GardenController():
         Updates the status of the button.
 
         Returns:
-            self.clicked: True if the start button was clicked and False if it
+            clicked: True if the start button was clicked and False if it
               wasn't. This boolean indicates to the program whether it should
               display the game next.
         """

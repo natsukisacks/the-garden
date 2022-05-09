@@ -7,15 +7,13 @@ import pygame
 from model import GardenModel, get_player
 from view import GardenView
 from controller import GardenController
-from pygame import mixer
-
-mixer.init()
 
 # Display setup
 pygame.init()
-screen = pygame.display.set_mode((800, 500))  # , pygame.FULLSCREEN)
+screen = pygame.display.set_mode((800, 500))
 
-model = GardenModel()
+# Create instances of various classes
+model = GardenModel() # to use in instances of GardenModel subclasses
 player = get_player()
 start_screen = model.StartScreen()
 button = model.Button()
@@ -24,8 +22,8 @@ level = model.Level(screen)
 view = GardenView(screen, model)
 controller = GardenController(model)
 
-mixer.music.load("graphics/background_music.ogg")
-mixer.music.play(-1)
+# Our background music
+view.music()
 
 while True:
     # handle every event since the last frame
@@ -38,11 +36,11 @@ while True:
         controller.handle_keys()
         view.draw_game()
         view.draw_player()
-        level.update()  # draws the map
+        level.update()  # checks for collisions
 
     # Display the home screen
     if controller.clicked is False:
-        controller.handle_keys()  # handle the keys
+        controller.handle_keys()
         view.draw_home()
         controller.update_button()
         view.draw_player()

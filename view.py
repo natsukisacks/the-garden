@@ -3,7 +3,8 @@ Garden view class. Everything in this file contains elements belonging
 to the view portion of the MVC architecture.
 """
 import pygame
-from model import get_player  # GardenModel
+from model import get_player
+from pygame import mixer
 
 
 class GardenView():
@@ -12,14 +13,13 @@ class GardenView():
     the view, in a way that is easily understandable by the user.
 
     Attributes:
-        self.surface: A pygame surface on which visuals will be displayed. This
+        surface: A pygame surface on which visuals will be displayed. This
             is passed in when an instance of this class is created.
-        self.screen: A pygame surface of width 800 and height 500.
-        self.level: An instance of the Level class within the GardenModel class.
-        self.player: A global instance of the player class.
-        self.button: An instance of the Button class within the GardenModel
-            class.
-        self.start: An instance of the StartScreen class within the GardenModel
+        screen: A pygame surface of width 800 and height 500.
+        level: An instance of the Level class within the GardenModel class.
+        player: A global instance of the player class.
+        button: An instance of the Button class within the GardenModel class.
+        start: An instance of the StartScreen class within the GardenModel
             class.
     """
 
@@ -39,21 +39,15 @@ class GardenView():
 
     def draw_game(self):
         """
-        Visualizes the game screen, which includes the background and the
-        entire level map.
+        Visualizes the game screen, which includes the background, the entire
+        level map, and the rectangle background for the point tracking.
         """
         self.screen.blit(self.level.background, (0, 0))
         self.level.static_tiles.draw(self.surface)
-        # points = 0
+
         # Points display
         pygame.draw.rect(self.surface, (255, 248, 220),
                          pygame.Rect(10, 460, 125, 50))
-
-        # # Draw points text
-        # self.draw_text(f"collected: {points}", 22, (0, 0, 0), (70, 470))
-
-        # points = 3 - len(self.level.kill_tiles)
-        # # print(self.level.points)
 
     def draw_player(self):
         """
@@ -70,3 +64,11 @@ class GardenView():
         self.screen.blit(self.start.screen_surface, (0, 0))
         self.screen.blit(self.start.title_surface, self.start.title_rect)
         self.screen.blit(self.button.start_button, self.button.rect)
+
+    def music(self):
+        """
+        Loads the background music file and plays it on repeat.
+        """
+        mixer.init()
+        mixer.music.load("graphics/background_music.ogg")
+        mixer.music.play(-1)
