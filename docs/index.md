@@ -5,8 +5,10 @@ In _The Garden_ you can walk around, harvest different types of produce, enjoy t
 We wanted to make a simple game that would be fun and relaxing, and that would also have pretty visuals. Through this project, we also wanted to learn the basics of creating a game using Pygame.
 
 ### Meet the player character!
-This is who you pay as. You control your character using the left, right, up, and down arrows. 
-<img src="graphics/player_character.png" width = "15%" height = "15%" style="float:left;margin:0px 30px">
+This is who you pay as. You control your character using the left, right, up, and down arrows.
+
+![player character](player_character.png)
+
 
 ### The produce!
 Collect produce by walking through it. Don’t worry, you won’t trample the plants. The number of vegetables you have collected will be displayed on the bottom left of the screen. Collect 20 vegetables to win a fun prize.
@@ -14,11 +16,11 @@ Collect produce by walking through it. Don’t worry, you won’t trample the pl
 
 #### The pomegranate tree!
 Yum, pomegranate!
-(image of tree)
+![pomegranate tree](pom_tree.png)
 
 #### The worm!
 He lives here.
-(image of worm)
+![worm](the_worm.png)
 
 ### Visualizations!
 We created the visualizations ourselves, using pixilart.com. We were inspired by 2D games, such as Stardew Valley and Undertale, in our design. 
@@ -30,6 +32,9 @@ The game opens with a start screen. Click on the start button to begin. Then, us
 ### Game Demo!
 <iframe width="560" height="315" src="https://youtu.be/-90kkBX34ZA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <br>
+
+### Presentation
+https://olincollege-my.sharepoint.com/:v:/g/personal/nsacks_olin_edu/Ee0tj4s1mopHqzpqz1B0E5oBO10Ou4pBAiFQ6uNBYuTVIw?e=eSBm1d 
 
 ## Download here!
 [link to github repo] 
