@@ -2,6 +2,9 @@
 Garden view class. Everything in this file contains elements belonging
 to the view portion of the MVC architecture.
 """
+# pylint: disable=protected-access
+# we have to access protected member to display it
+
 import pygame
 from pygame import mixer
 from model import get_player
@@ -43,7 +46,7 @@ class GardenView():
         level map, and the rectangle background for the point tracking.
         """
         self.screen.blit(self.level.background, (0, 0))
-        self.level.static_tiles.draw(self.surface)
+        self.level._static_tiles.draw(self.surface)
 
         # Points display
         pygame.draw.rect(self.surface, (255, 248, 220),

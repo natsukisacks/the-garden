@@ -120,7 +120,7 @@ class GardenModel():
             self.shrimp_rect = self.shrimp.get_rect(center=(400, 100))
 
             self.player = get_player()
-            self.points = 0
+            self._points = 0
             self.tilesize = 32
             self.gameover = False
             self.world_map = [
@@ -172,16 +172,23 @@ class GardenModel():
             ]
             self.setup_level()
 
+        @property
+        def points(self):
+            """
+            Returns the private attribute _points to be viewed and not edited.
+            """
+            return self._points
+
         def setup_level(self):
             """
             Places all of the sprite tiles to where they need to be based on
             the world map. Adds these tiles to the appropriate sprite groups.
             """
             # Tiles that don't change throughout the game
-            self.static_tiles = pygame.sprite.Group()
+            self._static_tiles = pygame.sprite.Group()
 
             # Tiles for the player to collect
-            self.veggie_tiles = pygame.sprite.Group()
+            self._veggie_tiles = pygame.sprite.Group()
 
             # Create the placement of the world map
             for row_index, row in enumerate(self.world_map):
@@ -194,46 +201,46 @@ class GardenModel():
                         self.vert_border = GardenModel.Tile(
                             (x_pos, y_pos), "graphics/fence-vertical.png",
                             (16, 40))
-                        self.static_tiles.add(self.vert_border)
+                        self._static_tiles.add(self.vert_border)
                     if col == "h":
                         self.hor_border = GardenModel.Tile(
                             (x_pos, y_pos), "graphics/fence-horizontal.png",
                             (32, 45))
-                        self.static_tiles.add(self.hor_border)
+                        self._static_tiles.add(self.hor_border)
                     if col == "r":
                         self.right_end_border = GardenModel.Tile(
                             (x_pos, y_pos), "graphics/fence-right-end.png",
                             (16, 45))
-                        self.static_tiles.add(self.right_end_border)
+                        self._static_tiles.add(self.right_end_border)
                     if col == "P":
                         self.pom_tree = GardenModel.Tile(
                             (x_pos, y_pos), "graphics/pom_tree.png", (200, 200))
-                        self.static_tiles.add(self.pom_tree)
+                        self._static_tiles.add(self.pom_tree)
                     if col == "p":
                         self.peas = GardenModel.Tile(
                             (x_pos, y_pos), "graphics/peas.png", (32, 32))
-                        self.veggie_tiles.add(self.peas)
+                        self._veggie_tiles.add(self.peas)
                     if col == "w":
                         self.watermelon = GardenModel.Tile(
                             (x_pos, y_pos), "graphics/watermelon.png", (32, 32))
-                        self.veggie_tiles.add(self.watermelon)
+                        self._veggie_tiles.add(self.watermelon)
                     if col == "t":
                         self.potato = GardenModel.Tile(
                             (x_pos, y_pos), "graphics/potato.png", (32, 16))
-                        self.veggie_tiles.add(self.potato)
+                        self._veggie_tiles.add(self.potato)
                     if col == "s":
                         self.spotato = GardenModel.Tile(
                             (x_pos, y_pos), "graphics/sweet potato.png",
                             (32, 16))
-                        self.veggie_tiles.add(self.spotato)
+                        self._veggie_tiles.add(self.spotato)
                     if col == "T":
                         self.tomato = GardenModel.Tile(
                             (x_pos, y_pos), "graphics/tomato.png", (25, 25))
-                        self.veggie_tiles.add(self.tomato)
+                        self._veggie_tiles.add(self.tomato)
                     if col == "c":
                         self.collect = GardenModel.Tile(
                             (x_pos, y_pos), "graphics/carrot.png", (16, 45))
-                        self.veggie_tiles.add(self.collect)
+                        self._veggie_tiles.add(self.collect)
 
         def draw_text(self, text, font_size, color, coords):
             """
@@ -264,8 +271,8 @@ class GardenModel():
             # Drawing the tiles & text to the surface. Couldn't do this in
             # view.py due to issues with the classes in model.py and view.py not
             # syncing correctly.
-            self.veggie_tiles.draw(self.display_surface)
-            self.draw_text(f"collected: {self.points}", 35, (0, 0, 0),
+            self._veggie_tiles.draw(self.display_surface)
+            self.draw_text(f"collected: {self._points}", 35, (0, 0, 0),
                            (70, 470))
 
             # Initializing the sound effect for picking up veggies.
@@ -273,14 +280,14 @@ class GardenModel():
 
             # Check if the player has picked up a veggie. If so, remove it
             # from the screen and add a point.
-            for produce in self.veggie_tiles:
+            for produce in self._veggie_tiles:
                 if pygame.sprite.collide_rect(self.player, produce):
                     produce.kill()
                     collected_sound.play()
-                    self.points += 1
+                    self._points += 1
 
             # Once the player gets enough produce, they win!
-            if self.points > 20:
+            if self._points > 20:
                 # Draw the winning screen with the mantis shrimp.
                 pygame.draw.rect(self.display_surface, (255, 248, 220),
                                  pygame.Rect(0, 0, 800, 500))
