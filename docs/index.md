@@ -34,11 +34,10 @@ The game opens with a start screen. Click on the start button to begin. Then, us
 <br>
 
 ### Presentation
-https://olincollege-my.sharepoint.com/:v:/g/personal/nsacks_olin_edu/Ee0tj4s1mopHqzpqz1B0E5oBO10Ou4pBAiFQ6uNBYuTVIw?e=eSBm1d 
+[Our presentation](https://olincollege-my.sharepoint.com/:v:/g/personal/nsacks_olin_edu/Ee0tj4s1mopHqzpqz1B0E5oBO10Ou4pBAiFQ6uNBYuTVIw?e=eSBm1d)
 
 ## Download here!
-[link to github repo] 
-To play this game, you can download it from our Github repository here. You will need to have python and pygame installed. Run the following command in your terminal to start the game:
+To play this game, you can download it from our [Github repository](https://github.com/olincollege/the-garden). You will need to have python and pygame installed. Run the following command in your terminal to start the game:
 $ python main.py
 For more detailed instructions and documentation, view the README file in the repository.
 
@@ -67,40 +66,3 @@ A big fan of art, boba, and the color green.
 
 ### Credits
 We got our music from mixkit.co and www.zapsplat.com.
-
-
-You can use the [editor on GitHub](https://github.com/olincollege/the-garden) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-![This is an image](graphics/player_character.png)
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/olincollege/the-garden/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) 
