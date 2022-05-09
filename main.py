@@ -7,6 +7,9 @@ import pygame
 from model import GardenModel, get_player
 from view import GardenView
 from controller import GardenController
+from pygame import mixer
+
+mixer.init()
 
 # Display setup
 pygame.init()
@@ -20,6 +23,9 @@ clock = pygame.time.Clock()
 level = model.Level(screen)
 view = GardenView(screen, model)
 controller = GardenController(model)
+
+mixer.music.load("graphics/background_music.ogg")
+mixer.music.play(-1)
 
 while True:
     # handle every event since the last frame

@@ -3,6 +3,9 @@ Garden model class. Everything in this file contains elements belonging
 to the model portion of the MVC architecture.
 """
 import pygame
+from pygame import mixer
+
+mixer.init()
 
 
 class GardenModel():
@@ -231,9 +234,11 @@ class GardenModel():
             self.veggie_tiles.draw(self.display_surface)
             self.draw_text(f"collected: {self.points}", 35, (0, 0, 0),
                            (70, 470))
+            collected_sound = mixer.Sound("graphics/collected_music.ogg")
             for produce in self.veggie_tiles:
                 if pygame.sprite.collide_rect(self.player, produce):
                     produce.kill()
+                    collected_sound.play()
                     self.points += 1
 
             # Once the player gets enough produce, they win
