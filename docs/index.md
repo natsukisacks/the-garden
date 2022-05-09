@@ -1,25 +1,28 @@
 ## Welcome to the Garden!
-In **The Garden** you can walk around, harvest different types of produce, enjoy the beautiful view and music, and maybe even find a secret little creature. There is no main objective, this is just a relaxing, interactive game. 
+In _The Garden_ you can walk around, harvest different types of produce, enjoy the beautiful view and music, and maybe even find a secret little creature.
 
 ### Our goal!
-We wanted to make a simple game that would be fun and relaxing, and would also have pretty visuals. In the next steps of our project, we want to add some roleplaying components, and expand the setting to have additional scenes (maybe a mystical forest, or a tavern, or a lake).
+We wanted to make a simple game that would be fun and relaxing, and would also have pretty visuals. In the next steps of our project, we want to add some roleplaying components, and expand the setting to have additional scenes.
 
 ### Meet the player character!
 This is who you pay as! You control your character using the left, right, up, and down arrows. 
 ![This is an image](graphics/player_character.png)
 
 ### The produce!
-Collect produce by walking through it. Don’t worry, you won’t trample the plants. The number of vegetables you have collected will be displayed on the x of the screen.
+Collect produce by walking through it. Don’t worry, you won’t trample the plants. The number of vegetables you have collected will be displayed on the bottom left of the screen. Collect 20 vegetables to win a fun prize.
+(images of selected produce)
 
-The pomegranate tree!
+#### The pomegranate tree!
 Yum, pomegranate!
+(image of tree)
+
+#### The worm!
+He lives here.
+(image of worm)
 
 ### Visualizations!
 We created the visualizations ourselves, using pixilart.com. We were inspired by 2D games, such as Stardew Valley and Undertale, in our design. 
-Start button!
-Press on it to start
-Background
-
+(image of whole garden)
 
 ### Game Demo!
 [Link to youtube video]
@@ -33,8 +36,10 @@ For more detailed instructions and documentation, read the README file in the re
 
 
 ### Meet the creators!
-Natsuki Sacks 
-Olga Pidruchna
+#### Natsuki Sacks 
+Olin College of Engineering 25’
+
+#### Olga Pidruchna
 Olin College of Engineering 25’
 Loves art, boba, and pastel colors.
 
