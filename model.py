@@ -90,7 +90,7 @@ class GardenModel():
                 surface: The surface on which the tiles will be placed.
             """
             self.display_surface = surface
-            background = pygame.image.load("graphics/background-5.png")
+            background = pygame.image.load("graphics/background-7.png")
             self.background = pygame.transform.scale(background, (800, 500))
             self.player = get_player()
             self.points = 0
@@ -154,7 +154,7 @@ class GardenModel():
             self.static_tiles = pygame.sprite.Group()
 
             # Tiles for the player to collect
-            self.kill_tiles = pygame.sprite.Group()
+            self.veggie_tiles = pygame.sprite.Group()
 
             for row_index, row in enumerate(self.world_map):
                 for col_index, col in enumerate(row):
@@ -180,27 +180,27 @@ class GardenModel():
                     if col == "p":
                         self.peas = GardenModel.Tile(
                             (x_pos, y_pos), "graphics/peas.png", (32, 32))
-                        self.kill_tiles.add(self.peas)
+                        self.veggie_tiles.add(self.peas)
                     if col == "w":
                         self.watermelon = GardenModel.Tile(
                             (x_pos, y_pos), "graphics/watermelon.png", (32, 32))
-                        self.kill_tiles.add(self.watermelon)
+                        self.veggie_tiles.add(self.watermelon)
                     if col == "t":
                         self.potato = GardenModel.Tile(
                             (x_pos, y_pos), "graphics/potato.png", (32, 16))
-                        self.kill_tiles.add(self.potato)
+                        self.veggie_tiles.add(self.potato)
                     if col == "s":
                         self.spotato = GardenModel.Tile(
                             (x_pos, y_pos), "graphics/sweet potato.png", (32, 16))
-                        self.kill_tiles.add(self.spotato)
+                        self.veggie_tiles.add(self.spotato)
                     if col == "T":
                         self.tomato = GardenModel.Tile(
                             (x_pos, y_pos), "graphics/tomato.png", (25, 25))
-                        self.kill_tiles.add(self.tomato)
+                        self.veggie_tiles.add(self.tomato)
                     if col == "c":
                         self.collect = GardenModel.Tile(
                             (x_pos, y_pos), "graphics/carrot.png", (16, 45))
-                        self.kill_tiles.add(self.collect)
+                        self.veggie_tiles.add(self.collect)
 
         def draw_text(self, text, font_size, color, coords):
             """
@@ -228,10 +228,10 @@ class GardenModel():
             Removes the specified sprite from the sprite list once the player
             collides with it.
             """
-            self.kill_tiles.draw(self.display_surface)
+            self.veggie_tiles.draw(self.display_surface)
             self.draw_text(f"collected: {self.points}", 35, (0, 0, 0),
                            (70, 470))
-            for produce in self.kill_tiles:
+            for produce in self.veggie_tiles:
                 if pygame.sprite.collide_rect(self.player, produce):
                     produce.kill()
                     self.points += 1
